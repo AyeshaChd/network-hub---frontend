@@ -12,4 +12,17 @@
      --navbar component  // permanent means to be in every page
      --outletcomponent  // every route children will come in outlet / dynamic components
      --footer            // permanent means to be in every page
-
+- install axios
+- install cors in backend and add middleware with configuration { origin ,credentials:true}
+- whenever  making api call from fronted do axios {withCredentials :true}
+install Redux tool kit https://redux-toolkit.js.org/tutorials/quick-start
+- install react readux + toolkit
+-  configureStore => provider => createSlice => add reducer to store 
+- add redux dev tools extension in chrome
+- login and see if ur data is coming properly
+- navbar should update as far as user logs in
+- make a constant  file 
+- you should not access other routes without login
+ - if token is not present , resirect user to login page
+- logout feature
+- profile page
