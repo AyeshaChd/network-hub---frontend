@@ -26,3 +26,7 @@ install Redux tool kit https://redux-toolkit.js.org/tutorials/quick-start
  - if token is not present , resirect user to login page
 - logout feature
 - profile page
+- Edit profile feature
+- show toast on save of file
+- New page : show connections
+- New page : show

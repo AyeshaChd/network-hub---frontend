@@ -1,12 +1,12 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
  import { useDispatch } from "react-redux";
   import { BASE_URL } from "../utils/constants";
   import axios from "axios"
   import {addUser} from "../utils/userSlice"
 
 const EditProfile = ({user}) => {
-  
-  
+     console.log("edit profile")
+ 
     const [firstName ,setfirstName] =useState(user.firstName);
             const [lastName ,setlastName] =useState(user.lastName)
     const [photoUrl ,setphotoUrl] =useState(user.photoUrl);
@@ -15,6 +15,7 @@ const EditProfile = ({user}) => {
             const [about ,setabout] =useState(user.about)
              const dispatch = useDispatch()
                const [error,setError]=useState("")
+               const [alert ,setalert]=useState(false)
            
            
              const handleSave = async ()=>
@@ -23,8 +24,12 @@ const EditProfile = ({user}) => {
                  const res= await axios.patch(BASE_URL + "/profile/edit",{
                     firstName,lastName,age,photoUrl,gender,about
                    },{withCredentials:true})
+                     setalert(true)
+                       
                      dispatch(addUser( res?.data?.data))  // make sure you are sending the updated data to the store
-                   
+              
+         
+  
              }
             
               catch(error)
@@ -33,7 +38,25 @@ const EditProfile = ({user}) => {
         console.log(error.message)
               }
             } 
+            useEffect(()=>
+            {
+              if(alert)
+              {
+                setTimeout(()=>{
+                     setalert(false)
+                },3000)
+              }
+
+            },[alert])
              return (
+              <>
+               {alert &&  <div className="toast toast-top toast-center mt-2 [z-index:9999]">
+ 
+  <div className="alert alert-success">
+    <span>Profile updated successfully.</span>
+  </div>
+</div>
+}
           
             <div className="flex justify-center mt-2  pb-20">
              <div className="card card-border bg-black w-80 ">
@@ -74,10 +97,16 @@ const EditProfile = ({user}) => {
             <div className="card-actions justify-center">
             <button className="btn btn-primary mt-1" onClick={handleSave}>Save Profile</button>
             </div>
+              
           </div>
+
+                   
         </div> 
+    
+         
       
         </div>
+        </>
    
   )
         

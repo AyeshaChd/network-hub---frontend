@@ -3,17 +3,17 @@
 const UserCard = ({user}) => {
     const {firstName ,lastName,age ,gender, photoUrl ,about} = user
   return (
-    <div className="card bg-base-300 w-80 shadow-sm ">
-  <figure className="h-70" >
+    <div className="card bg-base-300 w-80 shadow-sm mt-1 ">
+  <figure className="h-70 w-full object-cover" >
     <img
       src={photoUrl}
       alt="Picture"
-      className="w-full h-full  object-cover" />
+      className="w-full   object-cover " />
 
   </figure>
   <div className="card-body">
     <h2 className="card-title"> {firstName + " " + lastName}</h2>
-    { age && gender && <p>{age + "   " + gender}</p>}
+    { age && gender && <p>{age + "  , " + gender}</p>}
     <p>{about}</p>
     <div className="card-actions justify-center">
       <button className="btn btn-primary">Ignore</button>

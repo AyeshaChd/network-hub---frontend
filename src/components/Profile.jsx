@@ -8,12 +8,12 @@ const Profile = () => {
 
    const user = useSelector(store => store.user)
     if( ! user) return
-   console.log(user)
+ 
   return (
-    <div className="flex  justify-center">
-    <div className="mx-2"><EditProfile user={user} />
+    <div className="flex flex-col md:flex-row justify-center items-center md:items-start gap-4 p-4">
+    <div className="w-full max-w-sm flex justify-center"><EditProfile user={user} />
     </div >
-     <div className=" mt-2"><UserCard user={user}  />
+     <div className=" w-full max-w-sm flex justify-center md:mt-1"><UserCard user={user}  />
     </div>  
     </div>
   )
