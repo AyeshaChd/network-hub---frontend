@@ -34,7 +34,7 @@ const EditProfile = ({user}) => {
             
               catch(error)
               {
-                 setError(error.message)
+                 setError(error.response)
         console.log(error.message)
               }
             } 
@@ -50,7 +50,7 @@ const EditProfile = ({user}) => {
             },[alert])
              return (
               <>
-               {alert &&  <div className="toast toast-top toast-center mt-2 [z-index:9999]">
+               {alert &&  <div className="toast toast-top toast-center mt-2 [z-index:9999] ">
  
   <div className="alert alert-success">
     <span>Profile updated successfully.</span>
@@ -58,7 +58,7 @@ const EditProfile = ({user}) => {
 </div>
 }
           
-            <div className="flex justify-center mt-2  pb-20">
+            <div className="flex justify-center mt-2  pb-10">
              <div className="card card-border bg-black w-80 ">
           <div className="card-body gap-1">
             <h3 className="card-title justify-center">Edit Profile</h3>

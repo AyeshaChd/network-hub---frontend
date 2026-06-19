@@ -29,4 +29,98 @@ install Redux tool kit https://redux-toolkit.js.org/tutorials/quick-start
 - Edit profile feature
 - show toast on save of file
 - New page : show connections
-- New page : show
+- New page : show connection Requests
+
+
+
+
+#Deployment
+Sign up to AWS
+Launch an instance 
+Connect to the instance:
+   -In git bash : do 
+     -  cd Downlaods (for to be in folder where .pem files are present)
+     - chmod 400 "DevTinder-secret.pem" (modifying permissions in .pem file)
+     - ssh -i "DevTinder-secret.pem" ubuntu@ec2-13-60-83-216.eu-north-1.compute.amazonaws.com 
+     -by all this u will connect to Aws machine
+Install node.js on Aws machine:
+      - now see in project at ur laptop which version of node is installed
+      - go to node js website --- select macOS using nvm 
+      - give all these commands in git bash after connecting to aws machine to download node at aws server system but remember to give the downlaod  same version of node which is at ur loal machine(laptop) where project is running completely fine ,otherwise there would be issue
+GiT clone: AWS machine does not have code of project ,give it  that code by GIT clone 
+      - in gitbash "git clone http url of project "  
+      - give this command for both projects
+      - do "ls" to check both projects are tere now
+Frontend:
+     - Go into required directory:
+          -- in git bash do, cd project name (e.g divTinder frontend ),now u r in required folder on AWS ,
+     - Npm install : 
+          --do npm install , it will download all dependencies of ur project (vitetc) 
+     - Npm run built :
+          -- give this command  in git bash to built ur project for prodection,
+            vite compile ur      project and create a dist folder for it which we deploy,do "ls" to see dist folder and node modules created.
+     - sudo apt update (it will update all packages)
+     - sudo apt install nginx
+               (download nginx to host our frontend,we will deploy our fontend on it    uisng it as http server)
+     - sudo systemctl start nginx (to start engine x server)
+     - sudo systemctl enable nginx (enable engine x)
+     - copy files from dist(build files ) to nginx http server
+          -- sudo scp -r dist/* /var/www/html/ (copy command) 
+             (sudo  ->root level permissions , csp ->copy it , -r  recursive , dist/* all folder ,/var/www/html/  -> nginx http server)
+          -- check copied or not 
+             cd /var/www/html/ 
+             ls 
+          -- check before the copy command ,then cd frontend project name and copy command and then check again u will see difference
+    - Enable the  port 80 of ur instance as aws blocks all the ports and nginx is on 80 port
+          -- go to aws > security>security groups > in bound rules> add rule>type:HTTP , port 80 and  source 0.0.0.0/0 (mens allowing access from anywhere  on internet.)
+    - now run the public ipv4 address to see ur deployed webapp
+
+   - BACKEND
+      - updated db password if we changed it 
+      - allowed ec2 instance public ip to access mongoDB server 
+      - cd network-hub-backend 
+      - npm install
+      - npm run start
+      - npm install pm2 -g (for project to keep running in bsckground for 24/7)
+      - pm2 start npm --name "Devtinder-backend" -- start
+      - pm2 logs 
+      - pm2 list ,pm2 stop<name>,pm2 delete<name>,pm2 start --name "devTinder-backend" -- start
+
+
+
+    TO CONNECT BACKEND AND FRONTEND TO EACH OTHER
+    # Nginx config
+      -> nginx configuration to map /api to port 3000;
+     - sudo nano /etc/nginx/sites-available/default
+
+         -  do nginx configuration in opened file:
+
+          server-name:13.60.83.216
+
+          location /api/ { proxy_pass http://localhost:3000/;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host; proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme; 
+        proxy_set_header Upgrade $http_upgrade;
+         proxy_set_header Connection "upgrade"; 
+         }
+      -> restart nginx
+       sudo systemctl restart nginx
+     -> modify the base-url in constants to "/api" ,now all will work perfectly fine
+
+
+
+ -----------------------Concept
+       frontend  =  http:// 13.60.83.216 /
+        backend  =  http:// 13.60.83.216 :3000 /
+
+     Domain name = DevTinder.com -> 13.60.83.216  (domain name i smapped to ip address)
+       frontend  =   DevTinder.com /
+       backend  =   DevTinder.com :3000 /
+     correct is:
+
+      frontend  =   DevTinder.com 
+       backend  =   DevTinder.com/api (/api is mapped to port no by nginx proxy pass)
+    
+      

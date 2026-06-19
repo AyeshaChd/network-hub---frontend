@@ -35,7 +35,7 @@ catch(error)
   }, []); // Empty array ensures this only runs once when the component mounts
 
   return (
-    <div>
+    <div >
         <NavBar/>
         <Outlet/>
         <Footer/>

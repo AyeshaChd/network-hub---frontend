@@ -1,6 +1,7 @@
  import { useSelector } from "react-redux"
  import EditProfile from "./EditProfile"
-  import UserCard from "./UserCard"
+
+import ProfileViewCard from "./ProfileViewCard"
 
 
 
@@ -10,10 +11,10 @@ const Profile = () => {
     if( ! user) return
  
   return (
-    <div className="flex flex-col md:flex-row justify-center items-center md:items-start gap-4 p-4">
+    <div className="flex flex-col mt-2 mb-12 sm:flex-row justify-center items-center sm:items-start  sm:gap-4 p-4">
     <div className="w-full max-w-sm flex justify-center"><EditProfile user={user} />
     </div >
-     <div className=" w-full max-w-sm flex justify-center md:mt-1"><UserCard user={user}  />
+     <div className=" w-full max-w-sm flex justify-center md:mt-1"><ProfileViewCard user={user}  />
     </div>  
     </div>
   )

@@ -21,13 +21,13 @@ const NavBar = () => {
   return navigate("/login")
   
   } catch (error) {
-    console.log(error.message);
+    console.log(error.reponse);
   }
     }
 
   return (
   
-            <div className="navbar 	bg-black shadow-sm">
+            <div className="navbar 	bg-black  shadow-sm ">
   <div className="flex-1">
     <Link to="/" className="btn btn-white text-xl">devTinder</Link>
   </div>
