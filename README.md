@@ -34,7 +34,7 @@ install Redux tool kit https://redux-toolkit.js.org/tutorials/quick-start
 
 
 
-#Deployment
+# Deployment
 Sign up to AWS
 Launch an instance 
 Connect to the instance:
@@ -51,12 +51,12 @@ GiT clone: AWS machine does not have code of project ,give it  that code by GIT 
       - in gitbash "git clone http url of project "  
       - give this command for both projects
       - do "ls" to check both projects are tere now
-Frontend:
+   # Frontend:
      - Go into required directory:
           -- in git bash do, cd project name (e.g divTinder frontend ),now u r in required folder on AWS ,
      - Npm install : 
           --do npm install , it will download all dependencies of ur project (vitetc) 
-     - Npm run built :
+     - Npm run build :
           -- give this command  in git bash to built ur project for prodection,
             vite compile ur      project and create a dist folder for it which we deploy,do "ls" to see dist folder and node modules created.
      - sudo apt update (it will update all packages)
@@ -68,14 +68,14 @@ Frontend:
           -- sudo scp -r dist/* /var/www/html/ (copy command) 
              (sudo  ->root level permissions , csp ->copy it , -r  recursive , dist/* all folder ,/var/www/html/  -> nginx http server)
           -- check copied or not 
-             cd /var/www/html/ 
-             ls 
+             cd /var/www/html/  
+             ls   ->u will see assets -----index.html
           -- check before the copy command ,then cd frontend project name and copy command and then check again u will see difference
     - Enable the  port 80 of ur instance as aws blocks all the ports and nginx is on 80 port
           -- go to aws > security>security groups > in bound rules> add rule>type:HTTP , port 80 and  source 0.0.0.0/0 (mens allowing access from anywhere  on internet.)
     - now run the public ipv4 address to see ur deployed webapp
 
-   - BACKEND
+   # BACKEND
       - updated db password if we changed it 
       - allowed ec2 instance public ip to access mongoDB server 
       - cd network-hub-backend 
@@ -86,10 +86,9 @@ Frontend:
       - pm2 logs 
       - pm2 list ,pm2 stop<name>,pm2 delete<name>,pm2 start --name "devTinder-backend" -- start
 
-
-
+  # NGINX CONFIG
     TO CONNECT BACKEND AND FRONTEND TO EACH OTHER
-    # Nginx config
+   
       -> nginx configuration to map /api to port 3000;
      - sudo nano /etc/nginx/sites-available/default
 
@@ -111,7 +110,7 @@ Frontend:
 
 
 
- -----------------------Concept
+ -------------# Concept
        frontend  =  http:// 13.60.83.216 /
         backend  =  http:// 13.60.83.216 :3000 /
 
@@ -122,5 +121,22 @@ Frontend:
 
       frontend  =   DevTinder.com 
        backend  =   DevTinder.com/api (/api is mapped to port no by nginx proxy pass)
+# conclusion of deployment on AWS
+aws instance , uploaded both frontend and abckend by git clone ,deployed frontend on nginx and added its port (80) to AWS ec2 instance . Then used pm2 and also added backend port to AWS ec2 instance . Did nginx config to map /api to  backend port no(localhost:3000/).updated the base url in constants .git pull and run build , deployed frontend (dist) again on nginx and then whole web app run on ipadress and on actions (buttons ) backend is called internally by nginx proxy pass
     
+
+# sending emails via SES
+ - create a IAM user
+ - give Access to AmazonSESFullAccess
+ - Amazon SES: Create an Identity
+ - verify ur domain name or email address
+ - Install AWS SDK - v3
+ - Code Example https://github.com/awsdocs/aws-doc-sdk-examples/blob/main/javascriptv3/example_code/ses/src/ses_sendemail.js#L16
+ - Setup SesClient
+ - Access Credentials should be created in IAm under Security Credentials tab
+ -Add the credentials to the env file
+ - Write code for SESClient
+ - write code for sending email
+ -  make the email dynamic by passing more params to the run function
+
       

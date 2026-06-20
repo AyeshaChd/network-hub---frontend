@@ -27,8 +27,8 @@ fetchRequests()
     )
     const reviewRequest=async(status,requestId,_id)=>
     {
-    console.log("requestiiiiiiid",requestId)
-      const res=  await axios.post(BASE_URL+ "/request/review/" + status +"/"+ requestId,{},{withCredentials:true})
+  
+      const res =  await axios.post(BASE_URL+ "/request/review/" + status +"/"+ requestId,{},{withCredentials:true})
       console.log( "rejected",res)
       dispatch(removeRequest(requestId))
       dispatch( removeUserFromFeed(_id))

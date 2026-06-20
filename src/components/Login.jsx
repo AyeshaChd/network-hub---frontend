@@ -32,8 +32,8 @@ const Login = () => {
     
       catch(error)
       {
-         setError(error.response)
-console.log(error.message)
+         setError(error.response?.data?.message || error.response?.data || "Invalid credentials")
+    console.log(error.message)
       }
     }
     const handleSignUp = async()=>
@@ -47,8 +47,8 @@ console.log(error.message)
       }
       catch(error)
       {
-          setError(error.response?.data || error.message)
-console.log(error)
+        setError(error.response?.data?.message || error.response?.data || "Invalid credentials")
+    console.log(error.message)
       }
     }
   return (
@@ -79,7 +79,7 @@ console.log(error)
  
 </fieldset></div>
 
-  <p className="text-red-700">{error}</p>
+  {error && <p className="text-red-700">{error}</p>}
    
     <div className="card-actions  flex-col justify-center items-center ">
     <p className="text-white cursor-pointer" onClick={()=>setLoggedIn(value=>!value)}>{isLoggedIn ? "New user ! SignUp here" :"aleady registered! login here"}</p>

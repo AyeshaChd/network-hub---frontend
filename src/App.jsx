@@ -18,6 +18,7 @@ function App() {
         <Route path="/" element={<Body/>}> // parent Route
           
             <Route path="/" element={<Feed/>}/>  // children Route
+            <Route path="/feed" element={<Feed/>}/>  // children Route
             <Route path="/login" element={<Login/>}/>  // children Route
             <Route path="/profile" element={<Profile/>}/> // children Route
             <Route path ="/connections" element={<Connections/>}/> //childen Route
