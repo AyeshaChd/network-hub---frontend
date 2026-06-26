@@ -7,6 +7,7 @@ import {Provider} from "react-redux"
 import Feed from "./components/Feed"
 import Connections from "./components/Connections"
 import Requests from "./components/Requests"
+import Premium from "./components/Premium"
 function App() {
  
 
@@ -23,6 +24,7 @@ function App() {
             <Route path="/profile" element={<Profile/>}/> // children Route
             <Route path ="/connections" element={<Connections/>}/> //childen Route
             <Route path ="/requests" element={<Requests/>}/>
+            <Route path ="/premium" element={<Premium/>}/>
         </Route>
       </Routes>
       </BrowserRouter>

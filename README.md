@@ -94,7 +94,7 @@ GiT clone: AWS machine does not have code of project ,give it  that code by GIT 
 
          -  do nginx configuration in opened file:
 
-          server-name:13.60.83.216
+          server-name:13.232.34.229
 
           location /api/ { proxy_pass http://localhost:3000/;
         proxy_http_version 1.1;
@@ -105,7 +105,7 @@ GiT clone: AWS machine does not have code of project ,give it  that code by GIT 
          proxy_set_header Connection "upgrade"; 
          }
       -> restart nginx
-       sudo systemctl restart nginx
+     
      -> modify the base-url in constants to "/api" ,now all will work perfectly fine
 
 
@@ -139,4 +139,38 @@ aws instance , uploaded both frontend and abckend by git clone ,deployed fronten
  - write code for sending email
  -  make the email dynamic by passing more params to the run function
 
+# .env file
+- .env file is configures on server and contains secret keys and credentials
+- .env file is made in backend and put in .gitignore and is not pushed to git
+- for production it is manually created on server as it is not in git 
+- through git bash connect to server and go to backend directory
+- git pull and npm i to install dotenv package
+- sudo nano .env to create .env file and paste all the data init , save and restart the pm2
+
+# Scheduling cron jobs in node.js
+  in backend
+- installing node-cron npm package
+- learning about cron syntax -- crontab.guru
+- Schedule a job
+- date-fns npm package to manage date
+- find all the unique email ID wo have receive connction request in previous day
+- send email
+- explore bee-queue & bull npm package
+
+# Razorpay integration
+- Sign up on razerpay & complete KYC
+- created a UI for a premium page
+- creating an api for create oder in backend
+- initialized razorpay in utils
+- create oder on razorpay
+- create schema and model
+- save the order in payment collections
+- make the api dynamic
+- setup the razorpay webhook on ur live api 
+- validate the webhook in api 
+   refrence: https://razorpay.com/docs/webhooks/validate-test/
+       -- webhook body -> req.body
+       -- const webhook signature = req.get("X-Razorpay-Signature")
+   update payment in db 
+    refernce :https://razorpay.com/docs/webhooks/payments/
       
