@@ -3,6 +3,7 @@ import axios from "axios"
 
 const Premium = () => {
 
+
   const handleBuyButton=async(type)=>
   {
 const order = await axios.post(BASE_URL+"/payment/create",{
@@ -31,9 +32,15 @@ membershipType:type
       };
 
   //open dailogue box
+    try{
     const rzp = new window.Razorpay(options);
-      rzp.open();
+      rzp.open();}
+      catch(error)
+      {
+        console.log(error)
       }
+      }
+      
   return (
    <div className="flex w-2/3 m-3 mt-18 sm:m-auto sm:mt-20 ">
   <div className="card bg-base-300 rounded-box grid h-80 grow place-items-center"><h1  className="font-bold text-2xl sm:text-2xl text-center">Silver Membership</h1>
