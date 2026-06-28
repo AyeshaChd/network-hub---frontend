@@ -6,6 +6,7 @@ const Premium = () => {
 
   const handleBuyButton=async(type)=>
   {
+        try{
 const order = await axios.post(BASE_URL+"/payment/create",{
 membershipType:type
 },{
@@ -43,7 +44,7 @@ membershipType:type
       };
 
   //open dailogue box
-    try{
+
     console.log("Before constructor");
 
 const rzp = new window.Razorpay(options);
