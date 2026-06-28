@@ -29,15 +29,33 @@ membershipType:type
         theme: {
           color: '#F37254'
         },
+        // 👇 Add this
+  handler: function (response) {
+    console.log("Payment Success:", response);
+  },
+
+  // 👇 Add this
+  modal: {
+    ondismiss: function () {
+      console.log("Checkout popup closed");
+    }}
+        
       };
 
   //open dailogue box
     try{
-    const rzp = new window.Razorpay(options);
-      rzp.open();}
+    console.log("Before constructor");
+
+const rzp = new window.Razorpay(options);
+
+console.log("After constructor");
+
+rzp.open();
+
+console.log("After open");}
       catch(error)
       {
-        console.log(error)
+        console.error("Razorpay Error:", error);
       }
       }
       
