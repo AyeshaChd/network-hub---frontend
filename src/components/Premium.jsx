@@ -109,14 +109,19 @@ const { keyId, amount, currency, orderId, notes } = order.data;
       theme: {
         color: '#F37254'
       },
-      handler: function (response) {
-        console.log("Payment Success:", response);
-      },
-      modal: {
-        ondismiss: function () {
-          console.log("Checkout popup closed");
-        }
-      }
+     handler: function (response) {
+    console.log("SUCCESS", response);
+  },
+
+  modal: {
+    ondismiss: function () {
+      console.log("Popup closed");
+    },
+
+    escape: false,
+
+    confirm_close: true
+  }
     };
 
     // 💡 3. These will now safely execute
@@ -128,8 +133,24 @@ const { keyId, amount, currency, orderId, notes } = order.data;
 
     const rzp = new window.Razorpay(options);
     console.log("After constructor successfully built.");
+    rzp.on("payment.failed", function (response) {
+    console.log("Payment Failed");
+    console.log(response.error);
+});
 
+window.addEventListener("error", (e) => {
+    console.log("GLOBAL ERROR:", e.error);
+});
+
+window.addEventListener("unhandledrejection", (e) => {
+    console.log("UNHANDLED PROMISE:", e.reason);
+});
+
+  
+setTimeout(() => {
+    console.log("Opening Razorpay...");
     rzp.open();
+}, 100);
     console.log("rzp.open() method fired.");
 
   } catch (error) {
