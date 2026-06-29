@@ -61,17 +61,34 @@ const Premium = () => {
 //       }
  const handleBuyButton = async (type) => {
   try {
+    // const order = await axios.post(BASE_URL + "/payment/create", {
+    //   membershipType: type
+    // }, {
+    //   withCredentials: true
+    // });
+    //-----------------------------------------
     const order = await axios.post(BASE_URL + "/payment/create", {
-      membershipType: type
-    }, {
-      withCredentials: true
-    });
+  membershipType: type
+}, {
+  withCredentials: true
+});
+
+// 👇 ADD THESE 5 LINES
+console.log("========== BACKEND RESPONSE ==========");
+console.log(order.data);
+console.log("keyId =", order.data.keyId);
+console.log("orderId =", order.data.orderId);
+console.log("=====================================");
+
+// Then destructure
+const { keyId, amount, currency, orderId, notes } = order.data;
+    //--------------------------------
 
     // 💡 1. Print the raw response data to see exactly how your backend formatted it
-    console.log("RAW BACKEND DATA:", order.data);
+    // console.log("RAW BACKEND DATA:", order.data);
 
     // Destructure the expected fields
-    const { keyId, amount, currency, orderId, notes } = order.data;
+    // const { keyId, amount, currency, orderId, notes } = order.data;
     
     // 💡 2. Add safety fallbacks so missing notes don't crash your script
     const customerName = notes ? `${notes.firstName || ""} ${notes.lastName || ""}`.trim() : "Premium User";
